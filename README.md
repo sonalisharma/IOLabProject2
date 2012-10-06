@@ -5,7 +5,7 @@ Instagram Albums allows the user to create albums and drag/drop Instagram photos
 
 
 ARTHUR'S SECTION
-1 Testing stuff
+1 Conflicting stuff
 2 Testing again hahahah
 3
 
