@@ -1,4 +1,19 @@
-
+$.ajax({
+    type: 'GET',
+    dataType: 'jsonp',
+    cache: false,
+    url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
+    success: function(data) {
+      for (var i = 0; i < 12; i++) {
+            var pic = data.data[i];
+                picId = pic.id;
+                picLink = pic.link;
+                thumbUrl = pic.images.thumbnail.url;
+            $("#feed").append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
+      };
+      $('#top-content li').draggable({revert: true});
+    }
+});
 
 $(document).ready(function() {
   var j =1;
@@ -28,14 +43,13 @@ $(document).ready(function() {
                     });
                     return false;
                 });
-        $('#feed li').draggable({revert: true});
         $('.circleBase').droppable({
-          //accept: 'li',
+          accept: 'li',
           drop: function(event, ui) {
               // Don't confuse ul, the <ul> unordered-list with ui, the user interface element
               // .draggable('disable') says that we want to remove the draggable behavior
               alert("hello");
-          $(ui.draggable).draggable('disable').css({top: '0px', left: '0px'}).appendTo('#newalbum');
+          $(ui.draggable).draggable('disable').css({top: '0px', left: '0px'}).appendTo('#newalbum ul');
              }
         }
         );
@@ -166,10 +180,10 @@ function addContent(a1)
                                   var chkimg = u.substr(u.length - 3);
                                   if(chkimg == 'jpg')
                                   {
-                                    h+= '<img src="'+this.u+'" height="50" width="50" />';
+                                    h+= '<li><img src="'+this.u+'" height="50" width="50" /></li>';
                                   }
                                   chkimg="";
-                                 
+                                 h='<ul>'+h+'</ul>';
                                  //alert("inside loop h"+h);
 
                                           });
@@ -179,18 +193,6 @@ function addContent(a1)
                                   $('#'+a1).append(h);
                     });
 
-}$.ajax({
-    type: 'GET',
-    dataType: 'jsonp',
-    cache: false,
-    url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
-    success: function(data) {
-      for (var i = 0; i < 12; i++) {
-            var pic = data.data[i];
-                picId = pic.id;
-                picLink = pic.link;
-                thumbUrl = pic.images.thumbnail.url;
-            $("#feed").append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
-      };
-    }
-});
+}
+
+
