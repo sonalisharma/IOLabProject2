@@ -1,3 +1,15 @@
+body {
+    background: #FFFFFF;
+    font-family: "Avenir", "Droid Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    color: #222;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
 #wrapper{
 padding:20px;
 width: 1200px;
@@ -42,12 +54,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     	display:inline;
     }
 
-img{
-	float: left;
-    border: 0px;
-    padding:5px;
-}
-
 .circleBase img{
 	float: left;
     border: 0px;
@@ -56,13 +62,20 @@ img{
 #top-content{
 
 	width:1100px;
-	height:200px;
+	height:318px;
 	margin:auto;
 	 background-color:#F8F8FF; 
 	/*overflow:auto;*/	
 	float:left;
 
 }
+
+#feed {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0px;
+}
+
 #center-content{
 
 	width:1100px;
