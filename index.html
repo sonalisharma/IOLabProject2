@@ -3,23 +3,81 @@
 	<head>
     <meta charset="utf-8">
 		<title>Instagralbums</title>
+	
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+  		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script> 
+        <script language="JavaScript" type="text/javascript" src="js/index.js"></script>
+     	<link rel="stylesheet" type="text/css" href="css/index.css" />
 
-		<link rel="stylesheet" type="text/css" href="css/main.css" />
-        <script src="http://arthurche.com/js/jquery-1.8.2.min.js"></script>
-        <script src="http://arthurche.com/js/jquery-ui-1.8.23.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+
 
 	</head>	
-
 <body>
 <div id="wrapper">
 
-	<!-- Intro/header/instructions section -->
+<!-- Intro/header/instructions section -->
+
 	<h1>Welcome to Instagralbums!</h1>
+	<div id="top-content">
+	<ul>
+		<li><img height="50px" width="50" title="Twilight on the Golden Gate" src="http://farm9.staticflickr.com/8192/8075210015_bdb0d28c7b.jpg" alt="Twilight on the Golden Gate"/></li>
+		<li><img height="50px" width="50px" title="Twilight on the Golden Gate" src="http://farm9.staticflickr.com/8192/8075210015_bdb0d28c7b.jpg" alt="Twilight on the Golden Gate"/></li>		
+	</ul>
+		
+	</div>
 
-	<!-- Section to display new photos pulled from Instagram -->
-	<div id="instagram"></div>
+	<div id="center-content">
+	<input autofocus="autofocus" type="text" placeholder="Enter a username" onclick="this.value = '';" id="username" />
+			<button id="signin">Sign in</button>
 
+	</div>
+	<div id='bottom-content'>
+		<h3>Albums</h3>
+		<ul id='albums'>
+		<li>
+			<div id="newalbum" class="circleBase"><a href="#" id="new"><p>Create New Album</p></a></div>
+		</li>
+		</ul>
+	</div>
+	
+
+	<div id="newalbumdiv" style="display:none;">
+		
+            <ul>
+			    <li><input id='save-trail-name' placeholder='album name' type='text' name='save-trail-name'></li>
+			    <li><input type='button' name='save-album' value='Save Album' id='save-album'>
+			        <input type='button' name='save-cancel' value='Cancel' id='save-cancel'></li>
+
+			    <div id="error">
+			    </div>
+			    <p>It is very important that there is consistency in the way albums are created</p>
+			    We have defined certain rules for creating album names
+			    Esure that album name is a valid word
+			    Keep the first letter capital
+			    Rules for creating album name</p>
+
+
+
+
+            </ul>
+	
+	</div>
+	
+	</div>
+
+
+
+<!-- Form to input Flickr username and submit -->
+
+<!-- Section to hold images pulled from Flickr -->
+
+<!-- Section to display circles, and drop into -->
+
+<!-- Section to create new circles -->
+
+<!-- Delicious section? -->
 
 </div>
 </body>
