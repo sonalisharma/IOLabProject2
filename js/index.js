@@ -1,10 +1,12 @@
+// Make API call to Instagram and pull currently popular public Instagram photos
 $.ajax({
     type: 'GET',
     dataType: 'jsonp',
     cache: false,
     url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
     success: function(data) {
-      for (var i = 0; i < 12; i++) {
+      // Go through the first 14 results, and append them to #feed
+      for (var i = 0; i < 14; i++) {
             var pic = data.data[i];
                 picId = pic.id;
                 picLink = pic.link;
@@ -49,7 +51,7 @@ $(document).ready(function() {
               // Don't confuse ul, the <ul> unordered-list with ui, the user interface element
               // .draggable('disable') says that we want to remove the draggable behavior
               alert("hello");
-          $(ui.draggable).draggable('disable').css({top: '0px', left: '0px'}).appendTo('#newalbum ul');
+          $(ui.draggable).draggable('disable').css({top: '0px', left: '0px'}).appendTo($(this));
              }
         }
         );
@@ -156,6 +158,22 @@ $(document).ready(function() {
               k++;
           }
      });
+
+    // Make the new album divs droppable
+    $('.circleBase').droppable({
+      accept: 'li',
+      drop: function(event, ui) {
+        // Resize thumbnail to 50x50
+        $(ui.draggable).find("img")
+          .attr({width: '50px', height: '50px'
+        }); 
+        // Append thumbnail to album
+        $(ui.draggable)
+          .draggable('disable')
+          .css({top: '0px', left: '0px'})
+          .appendTo($(this));
+      }
+    });
           
 }
 function addContent(a1)
