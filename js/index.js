@@ -24,10 +24,20 @@ $(document).ready(function() {
      $('#signin').click(function() {
                     
                     var username = $('#username').val();
+                    var password=$('#password').val();
+                    if(!username || !password)
+                    {
+                      alert("Please enter a valid username and password");
+                    }
+                  else{
                     //alert("Hello");
                     // This cross-domain request requires that you use '?callback=?' because it is done using JSONP
                     $.getJSON('http://feeds.delicious.com/v2/json/' + username + '?callback=?',
                      function(json){
+                      if(json.length ==0)
+                      {
+                        alert("Sorry no matching results found!");
+                      }
                         $(json).each(function(index) {
                             //this.u // url
                             // this.d // description
@@ -44,6 +54,10 @@ $(document).ready(function() {
     //  $('#new-trail li').draggable({revert: true}); 
                     });
                     return false;
+
+}
+
+
                 });
         $('.circleBase').droppable({
           accept: 'li',
@@ -87,7 +101,7 @@ $(document).ready(function() {
 
              $('#save-album').click(function() {
 
-              alert("inside form");
+              //alert("inside form");
               var flag=0;
               var newhtml;
               var trailname= $("#save-trail-name").val();
@@ -100,7 +114,17 @@ $(document).ready(function() {
 
                             if(data.Error )
                             {
-                               $('#error').text("Sorry looks like this is not a valid word!!");
+                               var cssObj = {
+                                              'background-color':'transparent',
+                                                'top': '20px', 
+                                                'left':'120px', 
+                                                'width': '300px', 
+                                                'font-size':'10pt',
+                                                'font-family':'times new roman',
+                                                'font-style':'italic',
+                                                'color':'red'
+                                            }
+                               $('#error').text("Sorry looks like this is not a valid word, Try again!!!").css(cssObj);
                             }
                             else
                             {
