@@ -3,6 +3,7 @@ body {
     font-family: "Avenir", "Droid Sans", "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 1em;
     color: #222;
+    background-image:url('../img/background.jpg');
 }
 
 h1 {
@@ -47,10 +48,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     overflow:auto;
     
 }
+
+.circleBase1{
+    width: 250px;
+    height: 250px;
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    float:left ;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    overflow:auto;
+    
+}
 .circleBase a{
-    font-size:10px;
+     font-size:12px;,
+     font-family:times new roman
     }
     
+    .circleBase1 a{
+        margin-top:20px;
+    font-size:10px;
+    }
     li {
     	display:inline;
     }
@@ -65,7 +89,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	width:1100px;
 	height:318px;
 	margin:auto;
-	 background-color:#F8F8FF; 
+	//background-color:#F8F8FF; 
 	/*overflow:auto;*/	
 	float:left;
 
@@ -79,11 +103,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 #center-content{
 
-	width:1100px;
+	width:900px;
 	height:auto;
 	padding:10px;
 	margin-top:20px;
-	background-color:#F8F8FF; 
+	//background-color:#F8F8FF; 
     
 	overflow:auto;	
 	float:left;
@@ -105,12 +129,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     -moz-border-radius: 15px; 
     -webkit-border-radius: 15px; 
     border: 1px solid #EEE;
-    background-color:pink;
+  
         text-align: middle;
-
-    /* ARG!  The goal here is to center the login div in the middle of the page.  I
-       can't get "margin 0px auto;" to work.  There must be a "right" way to do this.
-     */
+background: #999999;
+background: -moz-linear-gradient(left, #999999 0%, #ffffff 100%);
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#999999), color-stop(100%,#ffffff));
+background: -webkit-linear-gradient(left, #999999 0%, #ffffff 100%);
+background: -o-linear-gradient(left, #999999 0%, #ffffff 100%);
+background: -ms-linear-gradient(left, #999999 0%, #ffffff 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999999', endColorstr='#ffffff',GradientType=1 );
+-ms-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#999999', endColorstr='#ffffff',GradientType=1 );
+background: linear-gradient(left, #999999 0%, #ffffff 100%);
     position: absolute;
     margin-left:350px; 
     margin-top: 100px;
@@ -118,13 +147,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     
 }
 
+#newalbumdiv p {
+    background-color:transparent;
+    position: absolute; top: 20px; left:120px; width: 300px; z-index:+2;font-size:12pt;
+    font-family:times new roman:bold;
+    font-style:italic;color:#23238e;
+    }
+
 #login li {
     display: block;
     padding-bottom: 3px;
 }
 
-#error  {
-    font-size:12px;
-    font-color:red;
-    padding: 5px;
+#error p {
+    background-color:transparent;
+    position: absolute; top: 20px; left:120px; width: 300px; z-index:+2;font-size:10pt;
+    font-family:times new roman:bold;
+    font-style:italic;color:red;
 }
