@@ -95,6 +95,15 @@ $(document).ready(function() {
               j++;
               });
             });
+
+          // Empty albums to clear them out when entering new Delicious credentials
+          $('#albums').empty();
+
+          // Re-create the new album creation div
+          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>Create New Album</p></a></div></div>')
+          .appendTo('#albums');
+
+          // Create albums in Delicious account
           createDivs(delicioustags,username);
         });
       return false;
@@ -225,12 +234,10 @@ function addContent(a1) {
   $.getJSON('http://feeds.delicious.com/v2/json/' + username + '/'+a1+'?callback=?',
     function(json){
       $(json).each(function(index) {
-        //alert("inside json function");
         // this.u // url
         // this.d // description
         // this.n // extended notes
         // this.t // array of tags
-        // alert(this.t);
         var u = this.u
         var chkimg = u.substr(u.length - 3);
 
