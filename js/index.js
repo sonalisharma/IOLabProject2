@@ -17,6 +17,58 @@ $.ajax({
     }
 });
 
+
+
+function dropify(section){
+      // Make the new album divs droppable
+    section.droppable({
+      accept: 'li',
+      drop: function(event, ui) {
+        // Resize thumbnail to 50x50
+        $(ui.draggable).find("img")
+          .attr({width: '50px', height: '50px'
+        }); 
+
+
+        // Save to Delicious
+
+        var postData = {
+            url: $(ui.draggable).find("img").attr("src"),
+            description: $(ui.draggable).find('a').attr('href'),
+            extended: "",
+            tags: $(this).attr("id"),
+            method: "posts/add",
+            username: $('#username').val(),
+            password: $('#password').val()
+        };
+
+        console.log(postData);
+
+        $.getJSON("http://courses.ischool.berkeley.edu/i290-iol/f12/resources/trailmaker/delicious_proxy.php?callback=?",
+        postData,
+         function(rsp){
+            if (rsp.result_code === "access denied") {
+                alert('The provided Delicious username and password are incorrect.');
+            } else if (rsp.result_code === "something went wrong") {
+                alert('There was an unspecified error communicating with Delicious.');
+            } else if (rsp.result_code === "done") {
+                    alert ("Your photo has been saved!");
+                }
+            }
+        );
+
+        // Append thumbnail to album
+        $(ui.draggable)
+          .draggable('disable')
+          .css({top: '0px', left: '0px'})
+          .appendTo($(this));
+      }
+    });
+
+}
+
+
+
 $(document).ready(function() {
   var j =1;
   var delicioustags=[];
@@ -59,16 +111,8 @@ $(document).ready(function() {
 
 
                 });
-        $('.circleBase').droppable({
-          accept: 'li',
-          drop: function(event, ui) {
-              // Don't confuse ul, the <ul> unordered-list with ui, the user interface element
-              // .draggable('disable') says that we want to remove the draggable behavior
-              alert("hello");
-          $(ui.draggable).draggable('disable').css({top: '0px', left: '0px'}).appendTo($(this));
-             }
-        }
-        );
+
+        dropify($('.circleBase'))
 
    // Use jQuery UI to make the #new-trail div droppable
 
@@ -112,7 +156,7 @@ $(document).ready(function() {
                            // alert("inside test read");
                             //alert(data.length);
 
-                            if(data.Error )
+                            if(data.Error)
                             {
                                var cssObj = {
                                               'background-color':'transparent',
@@ -136,8 +180,8 @@ $(document).ready(function() {
                                 $("#top-content").fadeIn(1000);
                                 $("#center-content").fadeIn(1000);
                                 $("#bottom-content").fadeIn(1000);
-                                 $('#newalbumdiv').css("display","");
-                             
+                                $('#newalbumdiv').css("display","");
+                                dropify($('.circleBase'));
                             }
 
 
@@ -168,7 +212,7 @@ $(document).ready(function() {
   for (k in obj) {
       out.push(k);
   }
-  //alert(out.length);
+
   k=0;
    $.each(out, function(index, value) {  
           if(!out[index].match(/(step:).*/))
@@ -186,21 +230,11 @@ $(document).ready(function() {
      });
 
     // Make the new album divs droppable
-    $('.circleBase').droppable({
-      accept: 'li',
-      drop: function(event, ui) {
-        // Resize thumbnail to 50x50
-        $(ui.draggable).find("img")
-          .attr({width: '50px', height: '50px'
-        }); 
-        // Append thumbnail to album
-        $(ui.draggable)
-          .draggable('disable')
-          .css({top: '0px', left: '0px'})
-          .appendTo($(this));
-      }
-    });
-    $(".circleBase").click(function() {
+    dropify($('.circleBase'))
+
+
+
+    $('.circleBase').click(function() {
         var idName = $(this).attr("id");
         //console.log("hello");
         //alert("This is your "+ idName);
