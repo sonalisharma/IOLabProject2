@@ -31,9 +31,9 @@ function dropify(section){
 
       // Assemble data for Delicious
       var postData = {
-          url: $(ui.draggable).find("img").attr("src"),
+          url: $(ui.draggable).find('a').attr('href'),
           description: $(ui.draggable).find('a').attr('href'),
-          extended: "",
+          extended: $(ui.draggable).find("img").attr("src"),
           tags: $(this).attr("id"),
           method: "posts/add",
           username: $('#username').val(),
@@ -238,11 +238,11 @@ function addContent(a1) {
         // this.d // description
         // this.n // extended notes
         // this.t // array of tags
-        var u = this.u
-        var chkimg = u.substr(u.length - 3);
+        var n = this.n
+        var chkimg = n.substr(n.length - 3);
 
         if (chkimg == 'jpg') {
-          h+= '<li><img src="'+this.u+'" height="50" width="50" /></li>';
+          h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="50" width="50" /></a></li>';
         }
         
         chkimg="";
