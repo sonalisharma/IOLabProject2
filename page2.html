@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>Instagralbums</title>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+  		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script> 
+        <script language="JavaScript" type="text/javascript" src="js/index.js"></script>
+
+     	<!-- CSS stylesheets -->
+     	<link rel="stylesheet" type="text/css" href="css/index.css" />
+
+
+		<script type="text/javascript">
+		//This script populates the page with the thumbnail photos from the album selected on the previous page
+		//The localStorage.getItem variables use localStorage items from the previous page
+			$(document).ready(function() {
+				  var name = localStorage.getItem("storedUsername");
+				  var album = localStorage.getItem("albumName");
+
+			  var h="";
+			 $.getJSON('http://feeds.delicious.com/v2/json/' + name + '/'+album+'?callback=?',
+			                     function(json){
+			                      //alert("json length:"+json.length);
+			                      //alert("inside json");
+			                        $(json).each(function(index) {
+			                           //alert("inside json function");
+			                            // this.u // url
+			                            // this.d // description
+			                            // this.n // extended notes
+			                            // this.t // array of tags
+			                           // alert(this.t);
+			                                  var u = this.u
+			                                  var chkimg = u.substr(u.length - 3);
+			                                  if(chkimg == 'jpg')
+			                                  {
+			                                    h+= '<li><img src="'+this.u+'" height="150" width="150" /></li>';
+			                                  }
+			                                  chkimg="";
+			                                 //h='<ul>'+h+'</ul>';
+			                                 //alert("inside loop h"+h);
+
+			                                          });
+			                                 listOfImages = '<ul>'+h+'</ul>';
+			                   
+			                                  //alert("h************:"+h);  
+			                                  $('#album').append(listOfImages);
+			                    });					          
+
+			});
+
+		</script>
+
+	</head>
+	<body>
+		<div id="page">
+			<h1>InstagrAlbums</h1>
+				
+			<div id="album">
+			</div>
+
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

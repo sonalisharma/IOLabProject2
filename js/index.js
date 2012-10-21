@@ -147,6 +147,8 @@ $(document).ready(function() {
 
               });
 
+    var name = localStorage.getItem("storedUsername");
+    var album = localStorage.getItem("albumName");
 
  });
  function createDivs(deltags,username) {
@@ -173,7 +175,7 @@ $(document).ready(function() {
           {
             arrout[k]= value.replace('trail:','');;
             value.replace('trail:','');
-            theHtml += '<li><div id='+ arrout[k]+' class=circleBase><a href="https://www.google.com" target="_blank"><p>'+ arrout[k]+'</p></a></div></li>';
+            theHtml += '<li><div id='+ arrout[k]+' class=circleBase><a href="page2.html" target="_blank"><p>'+ arrout[k]+'</p></a></div></li>';
             
              $("#albums").append(theHtml);
              theHtml='';
@@ -198,7 +200,13 @@ $(document).ready(function() {
           .appendTo($(this));
       }
     });
-          
+    $(".circleBase").click(function() {
+        var idName = $(this).attr("id");
+        //console.log("hello");
+        //alert("This is your "+ idName);
+        //use localStorage to store which album the user selects for display on the following linked page
+        localStorage.setItem("albumName",idName);
+    });   
 }
 function addContent(a1)
 {
@@ -225,16 +233,17 @@ function addContent(a1)
                                     h+= '<li><img src="'+this.u+'" height="50" width="50" /></li>';
                                   }
                                   chkimg="";
-                                 h='<ul>'+h+'</ul>';
+                                  //h='<ul>'+h+'</ul>';
                                  //alert("inside loop h"+h);
 
-                                          });
-                                 // h = '<ul>'+h+'</ul>';
+                        });
+                                 listOfImages = '<ul>'+h+'</ul>';
                    
                                   //alert("h************:"+h);  
-                                  $('#'+a1).append(h);
+                                  $('#'+a1).append(listOfImages);
                     });
-
+                //use localStorage to store the username for use by the following linked page
+                localStorage.setItem("storedUsername",username);  
 }
 
 
