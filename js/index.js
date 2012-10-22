@@ -241,7 +241,7 @@ function addContent(a1) {
         var n = this.n
         var chkimg = n.substr(n.length - 3);
 
-        if (chkimg == 'jpg') {
+        if (chkimg == 'jpg' || chkimg == 'png') {
           h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="50" width="50" /></a></li>';
         }
         
