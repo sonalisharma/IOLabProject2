@@ -6,7 +6,7 @@ body {
     background-image:url('../img/background.jpg');
 }
 
-h1 {
+h1, h2, h3, ul {
     margin: 0px;
     padding: 0px;
 }
@@ -117,8 +117,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 #bottom-content{
-	padding:20px;
-    margin-top:20px;
+	padding: 0px;
+    margin-top: 2px;
 	width:1100px;
 	height:400PX;
 	float:left;
