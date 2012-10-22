@@ -17,9 +17,11 @@
 <div id="wrapper">
 
 <!-- Intro/header/instructions section -->
-
-	<h1>Welcome to Instagralbums! </h1>
+	
+	<div id="description">
+	<h1>instagralbums</h1>
 	<p>Here are some of the latest popular Instagram photos. Instagralbums allows you to drag and drop them into albums of your choosing. To begin, please log in with Delicious credentials, which we are using as a pseudo back-end to save your albums. Ideally, you should use a fresh Delicious account dedicated to Instagralbums.</p>
+	</div>
 
 	<div id="delicious">
 		<input autofocus="autofocus" type="text" placeholder="Username" onclick="this.value = '';" id="username" />
@@ -28,7 +30,10 @@
 	</div>
 
 	<div id="reload">
-		<p><a href="#" id="more">Load more photos from Instagram</a></p>
+		<p><a href="#" id="more">Load more recent popular photos from Instagram</a></p>
+		<p>Or, load a specific user's recent photos:
+		<input autofocus="autofocus" type="text" placeholder="Instagram username" onclick="this.value = '';" id="instauser" />
+		<button id="loadUser">Load</button></p>
 	</div>
 
 	<div id="instagram">
@@ -37,7 +42,7 @@
 	</div>
 
 	<div id="gallery">
-		<h3 id="instructions"></h3>
+		<h2 id="instructions"></h2>
 		<ul id="albums">
 		</ul>
 	</div>
@@ -45,15 +50,15 @@
 
 	<div id="newalbumdiv" style="display:none;">
 		
-            <ul>
+            <ul id="newdivlist">
 			    <li><input id='save-trail-name' placeholder='album name' type='text' name='save-trail-name'></li>
 			    <li><input type='button' name='save-album' value='Save Album' id='save-album'>
 			        <input type='button' name='save-cancel' value='Cancel' id='save-cancel'></li>
 
 			    <div id="error">
 			    </div>
-			    <p>It is very important that there is consistency in the way album names are created,
-				ensure that album name is a valid word.</p>
+			    <li><p>It is very important that there is consistency in the way album names are created.
+				Please ensure that your album name is a valid English word.</p></li>
 
 
 

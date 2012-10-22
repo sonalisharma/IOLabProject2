@@ -23,35 +23,22 @@
 
 			  var h="";
 			 $.getJSON('http://feeds.delicious.com/v2/json/' + name + '/'+album+'?callback=?',
-			                     function(json){
-			                      //alert("json length:"+json.length);
-			                      //alert("inside json");
-			                        $(json).each(function(index) {
-			                           //alert("inside json function");
-			                            // this.u // url
-			                            // this.d // description
-			                            // this.n // extended notes
-			                            // this.t // array of tags
-			                           // alert(this.t);
-			                                  var n = this.n
-			                                  var chkimg = n.substr(n.length - 3);
-			                                  if(chkimg == 'jpg')
-			                                  {
-			                                    h+= '<li><a href="'+this.u+'" target="_blank"><img src="'+this.n+'" height="200" width="200" class="albumDisplay"></a> &nbsp;&nbsp;&nbsp;</li>';
-			                                  }
-			                                  chkimg="";
-			                                 //h='<ul>'+h+'</ul>';
-			                                 //alert("inside loop h"+h);
-
-			                                          });
-			                                 listOfImages = '<ul>'+h+'</ul>';
-			                   
-			                                  //alert("h************:"+h);  
-			                                  $('#album').append(listOfImages);
-			                    });					          
+                 function(json){
+                    $(json).each(function(index) {
+                	      var n = this.n
+                	      var chkimg = n.substr(n.length - 3);
+                	      if(chkimg == 'jpg') {
+                	        h+= '<li><a href="'+this.u+'" target="_blank"><img src="'+this.n+'" height="200" width="200" class="albumDisplay"></a> &nbsp;&nbsp;&nbsp;</li>';
+                	      }
+                	      chkimg="";
+					});
+                	
+                	listOfImages = '<ul>'+h+'</ul>';
+                	$('#album').append(listOfImages);
+                });		
+				
 				$('h1').append(album);
 			});
-
 		</script>
 
 	</head>

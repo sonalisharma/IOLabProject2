@@ -6,7 +6,7 @@ $.ajax({
     url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
     success: function(data) {
       $('#feed').empty();
-      // Go through the first 14 results, and append them to #feed
+      // Go through the first 12 results, and append them to #feed
       for (var i = 0; i < 12; i++) {
             var pic = data.data[i];
                 picId = pic.id;
@@ -27,7 +27,7 @@ function dropify(section){
 
       // Resize thumbnail to 50x50
       $(ui.draggable).find("img")
-        .attr({width: '50px', height: '50px'
+        .attr({width: '55px', height: '55px'
       }); 
 
       // Assemble data for Delicious
@@ -99,17 +99,19 @@ $(document).ready(function() {
 
           // Empty albums to clear them out when entering new Delicious credentials
           $('#albums').empty();
-          $('#instructions').text('drag photos to your albums below to save them');
+          $('#instructions').text('Drag photos to your albums below to save them, and click the album name to view them.');
 
           // Re-create the new album creation div
-          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>Create New Album</p></a></div></div>')
+          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:70px"><a href="#" id="new"><p>Create New Album</p></a></div></div>')
           .appendTo('#albums');
 
           // Event for clicking 'Create new album'
-          $('#new').click(function() {                
-            $("#instagram").fadeOut(1000);
-            $("#delicious").fadeOut(1000);
-            $("#gallery").fadeOut(1000);
+          $('#new').click(function() {
+            // $("#description").fadeOut(0); 
+            // $("#reload").fadeOut(0); 
+            // $("#delicious").fadeOut(0);            
+            // $("#instagram").fadeOut(0);
+            // $("#gallery").fadeOut(0);
             $('#newalbumdiv').css("display","");
             return false;
           });
@@ -135,7 +137,7 @@ $(document).ready(function() {
         url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
         success: function(data) {
           $('#feed').empty();
-          // Go through the first 14 results, and append them to #feed
+          // Go through the first 12 results, and append them to #feed
           for (var i = 0; i < 12; i++) {
                 var pic = data.data[i];
                     picId = pic.id;
@@ -149,15 +151,59 @@ $(document).ready(function() {
     return false;
   });
 
+  // Function to retrieve user photos
+  $('#loadUser').click(function() {
+    var instauser = $('#instauser').val();
+    var userurl = 'https://api.instagram.com/v1/users/search?q=' + instauser + '&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd';
+    console.log(userurl)
+
+    // API call to search username and retrieve an Instagram userid number
+    $.ajax({
+      
+        type: 'GET',
+        dataType: 'jsonp',
+        cache: false,
+        url: userurl,
+        success: function(data) {
+          var person = data.data[0];
+              personId = person.id;
+          console.log(person.id)
+       
+        // API call to get recent feed photos from that Instagram id
+        $.ajax({
+            type: 'GET',
+            dataType: 'jsonp',
+            cache: false,
+            url: 'https://api.instagram.com/v1/users/' + personId + '/media/recent/?access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
+            success: function(data) {
+              $('#feed').empty();
+              // Go through the first 12 results, and append them to #feed
+              for (var i = 0; i < 12; i++) {
+                    var pic = data.data[i];
+                        picId = pic.id;
+                        picLink = pic.link;
+                        thumbUrl = pic.images.thumbnail.url;
+                    $('#feed').append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
+              };
+              $('#instagram li').draggable({revert: true});
+            }
+         });
+        }
+    });
+    return false;
+  });
+
 
   // Event for clicking 'Cancel' in the new album popup
   $('#save-cancel').click(function() {
     $('#error').text('');
-    $('#newalbumdiv').fadeOut(1000);
+    $('#newalbumdiv').fadeOut(500);
     $('#newalbumdiv').css("display","none");
-    $("#instagram").fadeIn(1000);
-    $("#delicious").fadeIn(1000);
-    $("#gallery").fadeIn(1000);
+    $("#description").fadeIn(500); 
+    $("#reload").fadeIn(500); 
+    $("#instagram").fadeIn(500);
+    $("#delicious").fadeIn(500);
+    $("#gallery").fadeIn(500);
     $('#newalbumdiv').css("display","");
     return false;
   });
@@ -169,31 +215,37 @@ $(document).ready(function() {
     var trailname= $("#save-trail-name").val();
     
     // Check album name against dictionary API
-    // http://api.wordreference.com/0.8/0990b/json/enfr/
+    //  
     $.getJSON('http://api.wordreference.com/0.8/0990b/json/enfr/' + trailname + '?callback=?',
       function(data){
+        console.log(data.Error);
+        console.log(data);
         if(data.Error) {
-           var cssObj = {
-                          'background-color':'transparent',
-                            'top': '20px', 
-                            'left':'120px', 
-                            'width': '300px', 
-                            'font-size':'10pt',
-                            'font-family':'times new roman',
-                            'font-style':'italic',
-                            'color':'red'
-                        }
-           $('#error').text("Sorry looks like this is not a valid word, Try again!!!").css(cssObj);
+           // var cssObj = {
+           //                'background-color':'transparent',
+           //                  'top': '20px', 
+           //                  'left':'120px', 
+           //                  'width': '300px', 
+           //                  'font-size':'10pt',
+           //                  'font-family':'times new roman',
+           //                  'font-style':'italic',
+           //                  'color':'red'
+           //              }
+           // $('#error').text("Sorry looks like this is not a valid word, Try again!!!").css(cssObj);
+           // $('#newfeedlist').append('<li><p>NO DEFINITION</p></li>');
+           alert('In the name of Cory Doctorow, please use a real English word!');
         }
         else {
           newhtml='<li><div id='+trailname+' class=circleBase><a href=#><p>'+trailname+'</p></a></div></li>'
           $("#albums").append(newhtml);
           $('#error').text('');
-          $('#newalbumdiv').fadeOut(1000);
+          $('#newalbumdiv').fadeOut(500);
           $('#newalbumdiv').css("display","none");
-          $("#instagram").fadeIn(1000);
-          $("#delicious").fadeIn(1000);
-          $("#gallery").fadeIn(1000);
+          $("#description").fadeIn(500); 
+          $("#reload").fadeIn(500); 
+          $("#instagram").fadeIn(500);
+          $("#delicious").fadeIn(500);
+          $("#gallery").fadeIn(500);
           $('#newalbumdiv').css("display","");
           dropify($('.circleBase'));
         }
@@ -270,7 +322,7 @@ function addContent(a1) {
         var chkimg = n.substr(n.length - 3);
 
         if (chkimg == 'jpg') {
-          h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="50" width="50" /></a></li>';
+          h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="55" width="55" /></a></li>';
         }
         
         chkimg="";
