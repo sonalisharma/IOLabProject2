@@ -10,7 +10,8 @@ Sonali Sharma
 Team member responsibilities:
 Arthur - worked with the Instagram API to display the most recent public photos; handled final integration and debugging of team members' code
 Carinne - created page2 to display the photos of the selected album; worked on CSS styles and presentation
-Sonali - created the droppable albums and worked with the dictionary API to check spelling of tag names
+Sonali - responsible for the main page – layout, creation of albums from delicious by fetching tags, creating placeholder for albums and then putting images inside the albums. Creating new albums and validating
+the album name against dictionary.
 
 
 Project description:
@@ -21,6 +22,12 @@ Our approach: We met as a group to determine the concept for the project and the
 
 Which of Cory Doctorow's strawmen did you try to address:
 People are stupid. By providing a dictionary check of tag names, we ensured that users entered real words, spelled correctly.
+
+This project was based on controlled vocabulary where users create tags, which are often misspelled or are redundant. This is an attempt to solve the vocabulary problem by ensuring the following:
+
+1) Users place items in predefined categories to ensure uniformity and reduce redundancy. In our application we display the already existing photo albums to the user, in which user can drag and drop additional
+photographs from Instagram.
+2) User is given an option to create a new album, however to ensure that there are no misspelt names, the name are checked against a dictionary and the user is allowed to create only meaningful names.
 
 
 Technologies used on the project:
@@ -44,6 +51,8 @@ Browser support:
 Chrome
 Safari
 Firefox
+IE 7
 
 
 Bugs/quirks we're aware of:
+Cannot test albums names that have multiple words. While testing the names in loop the javascript was giving an error. This can be implemented as a future enhancement.
