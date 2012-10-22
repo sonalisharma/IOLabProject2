@@ -19,22 +19,23 @@
 <!-- Intro/header/instructions section -->
 
 	<h1>Welcome to Instagralbums! </h1>
-	<div id="top-content">
-	<ul id ="feed">
-	</ul>
-		
+	<p>Here are some of the latest popular Instagram photos. Instagralbums allows you to drag and drop them into albums of your choosing. To begin, please log in with Delicious credentials, which we are using as a pseudo back-end to savey our albums. Ideally, you should use a fresh Delicious account dedicated to Instagralbums.</p>
+
+	<div id="delicious">
+		<input autofocus="autofocus" type="text" placeholder="Username" onclick="this.value = '';" id="username" />
+		<input autofocus="autofocus" type="password" placeholder="Password" onclick="this.value = '';" id="password" />
+		<button id="signin">Sign in</button>
 	</div>
 
-	<div id="center-content">
-	<input autofocus="autofocus" type="text" placeholder="Enter a username" onclick="this.value = '';" id="username" />
-	<input autofocus="autofocus" type="password" placeholder="Enter password" onclick="this.value = '';" id="password" />
-	<button id="signin">Sign in</button>
-
+	<div id="instagram">
+		<ul id ="feed">
+		</ul>
 	</div>
-	<div id='bottom-content'>
+
+
+	<div id="gallery">
 		<h3>Albums</h3>
-		<ul id='albums'>
-		<p>Enter your Delicious credentials to save some instagralbums!
+		<ul id="albums">
 		</ul>
 	</div>
 	
@@ -48,10 +49,8 @@
 
 			    <div id="error">
 			    </div>
-			    <p> 
-			    It is very important that there is consistency in the way album names are created,
-				ensure that album name is a valid word.
-			   </p>
+			    <p>It is very important that there is consistency in the way album names are created,
+				ensure that album name is a valid word.</p>
 
 
 
@@ -61,18 +60,6 @@
 	</div>
 	
 	</div>
-
-
-
-<!-- Form to input Flickr username and submit -->
-
-<!-- Section to hold images pulled from Flickr -->
-
-<!-- Section to display circles, and drop into -->
-
-<!-- Section to create new circles -->
-
-<!-- Delicious section? -->
 
 </div>
 </body>

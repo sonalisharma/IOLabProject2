@@ -6,14 +6,14 @@ $.ajax({
     url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
     success: function(data) {
       // Go through the first 14 results, and append them to #feed
-      for (var i = 0; i < 14; i++) {
+      for (var i = 0; i < 12; i++) {
             var pic = data.data[i];
                 picId = pic.id;
                 picLink = pic.link;
                 thumbUrl = pic.images.thumbnail.url;
             $("#feed").append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
       };
-      $('#top-content li').draggable({revert: true});
+      $('#instagram li').draggable({revert: true});
     }
 });
 
@@ -82,7 +82,7 @@ $(document).ready(function() {
       $.getJSON('http://feeds.delicious.com/v2/json/' + username + '?callback=?',
         function(json) {
           if(json.length ==0) {
-            alert("Sorry no matching results found!");
+            alert("No existing albums detected. Go ahead and create some!");
           }
 
           $(json).each(function(index) {
@@ -100,8 +100,18 @@ $(document).ready(function() {
           $('#albums').empty();
 
           // Re-create the new album creation div
-          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>Create New Album</p></a></div></div>')
+          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>CreateMe New Album</p></a></div></div>')
           .appendTo('#albums');
+
+          // Event for clicking 'Create new album'
+          $('#new').click(function() {  
+            console.log('click achieved')                
+            $("#instagram").fadeOut(1000);
+            $("#delicious").fadeOut(1000);
+            $("#gallery").fadeOut(1000);
+            $('#newalbumdiv').css("display","");
+            return false;
+          });
 
           // Create albums in Delicious account
           createDivs(delicioustags,username);
@@ -111,25 +121,16 @@ $(document).ready(function() {
   });
 
   // Make any newly created divs droppable
-  dropify($('.circleBase'))
-
-  // Event for clicking 'Create new album'
-  $('#new').click(function() {                  
-    $("#top-content").fadeOut(1000);
-    $("#center-content").fadeOut(1000);
-    $("#bottom-content").fadeOut(1000);
-    $('#newalbumdiv').css("display","");
-    return false;
-  });
+  dropify($('.circleBase'));
 
   // Event for clicking 'Cancel' in the new album popup
   $('#save-cancel').click(function() {
     $('#error').text('');
     $('#newalbumdiv').fadeOut(1000);
     $('#newalbumdiv').css("display","none");
-    $("#top-content").fadeIn(1000);
-    $("#center-content").fadeIn(1000);
-    $("#bottom-content").fadeIn(1000);
+    $("#instagram").fadeIn(1000);
+    $("#delicious").fadeIn(1000);
+    $("#gallery").fadeIn(1000);
     $('#newalbumdiv').css("display","");
     return false;
   });
@@ -163,16 +164,16 @@ $(document).ready(function() {
           $('#error').text('');
           $('#newalbumdiv').fadeOut(1000);
           $('#newalbumdiv').css("display","none");
-          $("#top-content").fadeIn(1000);
-          $("#center-content").fadeIn(1000);
-          $("#bottom-content").fadeIn(1000);
+          $("#instagram").fadeIn(1000);
+          $("#delicious").fadeIn(1000);
+          $("#gallery").fadeIn(1000);
           $('#newalbumdiv').css("display","");
           dropify($('.circleBase'));
         }
         
         return false;
       });
-
+    return false;
   });
 
   var name = localStorage.getItem("storedUsername");
@@ -241,7 +242,7 @@ function addContent(a1) {
         var n = this.n
         var chkimg = n.substr(n.length - 3);
 
-        if (chkimg == 'jpg' || chkimg == 'png') {
+        if (chkimg == 'jpg') {
           h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="50" width="50" /></a></li>';
         }
         
