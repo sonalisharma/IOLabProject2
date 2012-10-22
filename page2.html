@@ -37,7 +37,7 @@
 			                                  var chkimg = n.substr(n.length - 3);
 			                                  if(chkimg == 'jpg')
 			                                  {
-			                                    h+= '<li><a href="'+this.u+'"><img src="'+this.n+'" height="150" width="150" /></li>';
+			                                    h+= '<li><a href="'+this.u+'" target="_blank"><img src="'+this.n+'" height="200" width="200" class="albumDisplay"></a> &nbsp;&nbsp;&nbsp;</li>';
 			                                  }
 			                                  chkimg="";
 			                                 //h='<ul>'+h+'</ul>';
@@ -49,15 +49,15 @@
 			                                  //alert("h************:"+h);  
 			                                  $('#album').append(listOfImages);
 			                    });					          
-
+				$('h1').append(album);
 			});
 
 		</script>
 
 	</head>
 	<body>
-		<div id="page">
-			<h1>InstagrAlbums</h1>
+		<div id="wrapper">
+			<h1>Your Instagralbum: </h1>
 				
 			<div id="album">
 			</div>
