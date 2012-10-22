@@ -50,6 +50,6 @@ IE 7
 
 ###Bugs/quirks we're aware of
 -Cannot test albums names that have multiple words. While testing the names in loop the javascript was giving an error. This can be implemented as a future enhancement.  
--The "create album" modal isn't a true modal (you can still click the stuff around it). Couldn't quite get the true modal working, would be able to sort it out with a bit more time.
--Originally, we wanted to make the "Create New Album" box droppable, but ran into some issues with that based on how we implemented the album creation.
+-The "create album" modal isn't a true modal (you can still click the stuff around it). Couldn't quite get the true modal working, would be able to sort it out with a bit more time.  
+-Originally, we wanted to make the "Create New Album" box droppable, but ran into some issues with that based on how we implemented the album creation.  
 -There's currently no way stop Instagralbums from re-loading photos you have already added to an album before when doing a refresh on the API.
