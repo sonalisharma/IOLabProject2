@@ -5,13 +5,14 @@ $.ajax({
     cache: false,
     url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
     success: function(data) {
+      $('#feed').empty();
       // Go through the first 14 results, and append them to #feed
       for (var i = 0; i < 12; i++) {
             var pic = data.data[i];
                 picId = pic.id;
                 picLink = pic.link;
                 thumbUrl = pic.images.thumbnail.url;
-            $("#feed").append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
+            $('#feed').append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
       };
       $('#instagram li').draggable({revert: true});
     }
@@ -98,14 +99,14 @@ $(document).ready(function() {
 
           // Empty albums to clear them out when entering new Delicious credentials
           $('#albums').empty();
+          $('#instructions').text('drag photos to your albums below to save them');
 
           // Re-create the new album creation div
-          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>CreateMe New Album</p></a></div></div>')
+          $('<li></li>').html('<div id="newalbum" class="circleBase1"><div style="margin-top:110px"><a href="#" id="new"><p>Create New Album</p></a></div></div>')
           .appendTo('#albums');
 
           // Event for clicking 'Create new album'
-          $('#new').click(function() {  
-            console.log('click achieved')                
+          $('#new').click(function() {                
             $("#instagram").fadeOut(1000);
             $("#delicious").fadeOut(1000);
             $("#gallery").fadeOut(1000);
@@ -113,15 +114,41 @@ $(document).ready(function() {
             return false;
           });
 
-          // Create albums in Delicious account
+          // Create albums from bookmarks in Delicious account
           createDivs(delicioustags,username);
+
+          // Make any newly created divs droppable
+          dropify($('.circleBase'));
+
         });
       return false;
     }
   });
 
-  // Make any newly created divs droppable
-  dropify($('.circleBase'));
+
+  // Event for clicking 'Load more photos'
+  $('#more').click(function() {
+    $.ajax({
+        type: 'GET',
+        dataType: 'jsonp',
+        cache: false,
+        url: 'https://api.instagram.com/v1/media/popular?client_id=a5f175ca507b49d5b009c8ad53c057dc&access_token=2038329.a5f175c.44acf3cf29d14357a416eed15e5475bd',
+        success: function(data) {
+          $('#feed').empty();
+          // Go through the first 14 results, and append them to #feed
+          for (var i = 0; i < 12; i++) {
+                var pic = data.data[i];
+                    picId = pic.id;
+                    picLink = pic.link;
+                    thumbUrl = pic.images.thumbnail.url;
+                $('#feed').append('<li class="feedPic" id="' + picId + '"><a target="_blank" href="' + picLink + '"><img src="' + thumbUrl +'"></a></li>');
+          };
+          $('#instagram li').draggable({revert: true});
+        }
+    });
+    return false;
+  });
+
 
   // Event for clicking 'Cancel' in the new album popup
   $('#save-cancel').click(function() {
@@ -216,7 +243,7 @@ function createDivs(deltags,username) {
   });
 
   // Make the new album divs droppable
-  dropify($('.circleBase'))
+  dropify($('.circleBase'));
 
   //use localStorage to store which album the user selects for display on the following linked page
   $('.circleBase').click(function() {

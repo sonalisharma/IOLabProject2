@@ -19,7 +19,7 @@
 <!-- Intro/header/instructions section -->
 
 	<h1>Welcome to Instagralbums! </h1>
-	<p>Here are some of the latest popular Instagram photos. Instagralbums allows you to drag and drop them into albums of your choosing. To begin, please log in with Delicious credentials, which we are using as a pseudo back-end to savey our albums. Ideally, you should use a fresh Delicious account dedicated to Instagralbums.</p>
+	<p>Here are some of the latest popular Instagram photos. Instagralbums allows you to drag and drop them into albums of your choosing. To begin, please log in with Delicious credentials, which we are using as a pseudo back-end to save your albums. Ideally, you should use a fresh Delicious account dedicated to Instagralbums.</p>
 
 	<div id="delicious">
 		<input autofocus="autofocus" type="text" placeholder="Username" onclick="this.value = '';" id="username" />
@@ -27,14 +27,17 @@
 		<button id="signin">Sign in</button>
 	</div>
 
+	<div id="reload">
+		<p><a href="#" id="more">Load more photos from Instagram</a></p>
+	</div>
+
 	<div id="instagram">
 		<ul id ="feed">
 		</ul>
 	</div>
 
-
 	<div id="gallery">
-		<h3>Albums</h3>
+		<h3 id="instructions"></h3>
 		<ul id="albums">
 		</ul>
 	</div>
